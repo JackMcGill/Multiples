@@ -25,7 +25,6 @@ public class Round {
         allOptions = generateOptions();
     }
 
-
     // returns an array of multiples with 5 elements
     private int[] generateMultiples() {
         int[] multiples = new int[5];
@@ -55,7 +54,7 @@ public class Round {
 
         // put factors into an array and reduce size to 5 (if current size is greater than 5)
         int[] factors;
-        if (allFactors.size()<5){
+        if (allFactors.size() < 5) {
             factors = new int[allFactors.size()];
 
             for (int i = 0; i < allFactors.size(); ++i) {
@@ -69,15 +68,12 @@ public class Round {
             }
         }
 
-
         return factors;
-
-
     }
 
+    // returns an array of options for the user to pick from - a mix of correct and incorrect choices
     private int[] generateOptions() {
         int[] options = Arrays.copyOf(correctAnswers, correctAnswers.length);
-
 
         Random random = new Random();
         boolean found = false;
@@ -111,11 +107,15 @@ public class Round {
         return options;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public int getRoundType() {
         return roundType;
     }
 
-    public int getNumber() {
-        return number;
+    public int[] getAllOptions() {
+        return allOptions;
     }
 }

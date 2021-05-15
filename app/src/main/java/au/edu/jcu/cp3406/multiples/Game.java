@@ -1,7 +1,5 @@
 package au.edu.jcu.cp3406.multiples;
 
-import android.util.Log;
-
 import java.util.Random;
 
 public class Game {
@@ -37,6 +35,10 @@ public class Game {
 
     public int getRoundType() {
         return round.getRoundType();
+    }
+
+    public int[] getAllOptions() {
+        return round.getAllOptions();
     }
 
     public void nextRound() {
