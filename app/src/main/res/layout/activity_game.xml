@@ -7,10 +7,10 @@
     tools:context=".GameActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Game screen"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="281dp" />
+        android:textAlignment="center"
+        android:id="@+id/numberTextView"
+        android:text="hello"
+        android:textSize="36sp"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
