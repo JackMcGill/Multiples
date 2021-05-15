@@ -2,7 +2,7 @@ package au.edu.jcu.cp3406.multiples;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,9 +12,16 @@ import static org.junit.Assert.*;
 public class UnitTesting {
 
     @Test
-    public void roundCreation_isCorrect() {
-        Round round = new Round(1, 256);
-        assertEquals(256, round.getNumber());
-        assertEquals(1, round.getRoundType());
+    public void multiplesRoundCreation_isCorrect() {
+        Round round1 = new Round(0, 25);
+        assertEquals(25, round1.getNumber());
+        assertEquals(0, round1.getRoundType());
+    }
+
+    @Test
+    public void factorsRoundCreation_isCorrect() {
+        Round round1 = new Round(1, 256);
+        assertEquals(256, round1.getNumber());
+        assertEquals(1, round1.getRoundType());
     }
 }

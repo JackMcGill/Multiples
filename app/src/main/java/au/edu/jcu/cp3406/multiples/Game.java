@@ -43,5 +43,13 @@ public class Game {
         return rounds[indexOfCurrentRound].getNumber();
     }
 
+    public int getRoundType() {
+        return rounds[indexOfCurrentRound].getRoundType();
+    }
+
+    public void nextRound() {
+        ++indexOfCurrentRound;
+    }
+
 
 }
