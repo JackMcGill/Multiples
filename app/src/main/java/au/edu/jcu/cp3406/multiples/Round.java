@@ -53,12 +53,22 @@ public class Round {
 
         Collections.shuffle(allFactors);
 
-        // put factors into an array and reduce size to 5
-        int[] factors = new int[5];
+        // put factors into an array and reduce size to 5 (if current size is greater than 5)
+        int[] factors;
+        if (allFactors.size()<5){
+            factors = new int[allFactors.size()];
 
-        for (int i = 0; i < 5; ++i) {
-            factors[i] = allFactors.get(i);
+            for (int i = 0; i < allFactors.size(); ++i) {
+                factors[i] = allFactors.get(i);
+            }
+        } else {
+            factors = new int[5];
+
+            for (int i = 0; i < 5; ++i) {
+                factors[i] = allFactors.get(i);
+            }
         }
+
 
         return factors;
 
