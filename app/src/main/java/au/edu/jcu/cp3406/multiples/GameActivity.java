@@ -18,12 +18,14 @@ public class GameActivity extends AppCompatActivity {
         game = new Game(5); // temporarily hardcoded
         numberView = findViewById(R.id.numberTextView);
 
-        numberView.setText(String.valueOf(game.getNumber()));
+        updateView();
 
     }
 
     public void updateView() {
-        
+
+        numberView.setText(String.valueOf(game.getNumber()));
+
     }
 
 }
