@@ -9,9 +9,12 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class UnitTesting {
+
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void roundCreation_isCorrect() {
+        Round round = new Round(1, 256);
+        assertEquals(256, round.getNumber());
+        assertEquals(1, round.getRoundType());
     }
 }

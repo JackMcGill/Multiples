@@ -40,7 +40,7 @@ public class Game {
     }
 
     public int getNumber() {
-        return rounds[indexOfCurrentRound].number;
+        return rounds[indexOfCurrentRound].getNumber();
     }
 
 
