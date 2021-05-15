@@ -8,43 +8,35 @@ public class Game {
     private final int numberOfRounds;
     private int indexOfCurrentRound = 0;
     private Round[] rounds;
+    private Round round;
 
     public Game(int numberOfRounds) {
         this.numberOfRounds = numberOfRounds;
-        rounds = generateRounds();
+        round = createRound();
     }
 
-    private Round[] generateRounds() {
-        rounds = new Round[numberOfRounds];
-
-        Random random = new Random();
+    private Round createRound() {
         int type;
         int number;
 
-        for (int i = 0; i < numberOfRounds; i++) {
-
-            // if type == 0, the round contains a multiples question
-            // if type == 1, the round contains a factors question
-            type = random.nextInt(2);
-            if (type == 0) {
-                number = random.nextInt(101) + 20; // int between 20 and 100
-            } else {
-                number = random.nextInt(501) + 100; // int between 100 and 500
-            }
-
-            rounds[i] = new Round(type, number);
-            Log.i("game", "Created round " + i);
+        // if type == 0, the round contains a multiples question
+        // if type == 1, the round contains a factors question
+        Random random = new Random();
+        type = random.nextInt(2);
+        if (type == 0) {
+            number = random.nextInt(81) + 20; // int between 20 and 100
+        } else {
+            number = random.nextInt(401) + 100; // int between 100 and 500
         }
-
-        return rounds;
+        return round = new Round(type, number);
     }
 
     public int getNumber() {
-        return rounds[indexOfCurrentRound].getNumber();
+        return round.getNumber();
     }
 
     public int getRoundType() {
-        return rounds[indexOfCurrentRound].getRoundType();
+        return round.getRoundType();
     }
 
     public void nextRound() {
