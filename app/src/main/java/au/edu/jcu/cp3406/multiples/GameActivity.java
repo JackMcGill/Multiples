@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 public class GameActivity extends AppCompatActivity {
 
     private Game game;
@@ -22,23 +20,25 @@ public class GameActivity extends AppCompatActivity {
     private TableRow row;
     private Button button;
     private int[] options;
-    private int score;
+    private int totalScore;
+    private int scoredThisRound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         game = new Game(5); // temporarily hardcoded
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
-        score = 0;
+        totalScore = 0;
+        scoredThisRound = 0;
 
         updateView();
     }
 
     public void updateView() {
+        this.setTitle("Round " + game.getRound() + 1);
         if (game.getRoundType() == 0) {
             instructions.setText(R.string.multiples_instructions);
         } else instructions.setText(R.string.factors_instructions);
@@ -48,7 +48,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void populateButtons() {
-
         options = game.getAllOptions();
         int index = 0;
 
@@ -74,13 +73,19 @@ public class GameActivity extends AppCompatActivity {
         if (game.checkAnswer(playerAns)) {
             button.setTextColor(0xff669900);
             // score 1 point
-            score++;
+            totalScore++;
+            scoredThisRound++;
         } else {
             button.setTextColor(Color.RED);
             // score no points
         }
 
+        if (scoredThisRound == game.getNumberOfAnswers()) {
+            scoredThisRound = 0;
+            // end of round
+        }
+
         Log.i("GameActivity", button.getText() + " pressed");
-        Log.i("GameActivity", "Score is: " + score);
+        Log.i("GameActivity", "Score is: " + totalScore);
     }
 }

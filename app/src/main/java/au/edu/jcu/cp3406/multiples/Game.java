@@ -45,6 +45,10 @@ public class Game {
         ++indexOfCurrentRound;
     }
 
+    public int getNumberOfAnswers() {
+        return round.getCorrectAnswers().length;
+    }
+
     public boolean checkAnswer(int playerAns) {
         int[] correctAnswers = round.getCorrectAnswers();
         boolean isCorrect = false;
@@ -55,5 +59,9 @@ public class Game {
             }
         }
         return isCorrect;
+    }
+
+    public int getRound() {
+        return indexOfCurrentRound;
     }
 }
