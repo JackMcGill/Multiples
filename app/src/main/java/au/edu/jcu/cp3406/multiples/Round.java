@@ -79,7 +79,7 @@ public class Round {
         boolean found = false;
         while (options.length < 10) {
 
-            int newNum = random.nextInt(100);
+            int newNum = random.nextInt(number);
             for (int num : options) {
 
                 if (newNum == num) {

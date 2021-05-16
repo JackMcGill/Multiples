@@ -38,7 +38,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
 
                 android:textSize="42sp" />
 
@@ -49,7 +48,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
         </TableRow>
 
@@ -66,7 +64,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
 
             <Button
@@ -76,7 +73,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
         </TableRow>
 
@@ -93,7 +89,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
 
             <Button
@@ -103,7 +98,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
         </TableRow>
 
@@ -120,7 +114,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
 
             <Button
@@ -130,7 +123,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
         </TableRow>
 
@@ -147,7 +139,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
 
             <Button
@@ -157,8 +148,25 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="buttonPressed"
-                android:text="42"
                 android:textSize="42sp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/row_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/next_round"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="nextRound"
+                android:text="@string/next_round"
+                android:textSize="42sp"
+                android:visibility="gone" />
+
         </TableRow>
 
     </TableLayout>

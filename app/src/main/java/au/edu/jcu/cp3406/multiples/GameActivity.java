@@ -19,9 +19,10 @@ public class GameActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private TableRow row;
     private Button button;
+    private Button nextRound;
     private int[] options;
     private int totalScore;
-    private int scoredThisRound;
+    private int guessedCorrect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,9 @@ public class GameActivity extends AppCompatActivity {
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
+        nextRound = findViewById(R.id.next_round);
         totalScore = 0;
-        scoredThisRound = 0;
+        guessedCorrect = 0;
 
         updateView();
     }
@@ -58,6 +60,8 @@ public class GameActivity extends AppCompatActivity {
                 button = (Button) row.getChildAt(j);
                 String numberAsString = String.valueOf(options[index]);
                 button.setText(numberAsString);
+                button.isEnabled();
+                button.setVisibility(View.VISIBLE);
                 index++;
             }
         }
@@ -74,18 +78,55 @@ public class GameActivity extends AppCompatActivity {
             button.setTextColor(0xff669900);
             // score 1 point
             totalScore++;
-            scoredThisRound++;
+            guessedCorrect++;
         } else {
             button.setTextColor(Color.RED);
             // score no points
         }
 
-        if (scoredThisRound == game.getNumberOfAnswers()) {
-            scoredThisRound = 0;
-            // end of round
+        if (guessedCorrect == game.getNumberOfAnswers()) {
+            endOfRound();
         }
 
         Log.i("GameActivity", button.getText() + " pressed");
         Log.i("GameActivity", "Score is: " + totalScore);
+        Log.i("GameActivity", "guessedCorrect: " + guessedCorrect);
+    }
+
+    private void endOfRound() {
+        // disable and hide buttons
+        int index = 0;
+
+        for (int i = 0; i < 5; ++i) {
+            row = (TableRow) tableLayout.getChildAt(i);
+            for (int j = 0; j < 2; ++j) {
+                Log.i("GameActivity", "Number: " + String.valueOf(options[index]) + " disabled");
+                button = (Button) row.getChildAt(j);
+                button.setEnabled(false);
+                button.setVisibility(View.GONE);
+                index++;
+            }
+        }
+
+        // display a message to the player
+        String endOfRoundMessage;
+        if (guessedCorrect == game.getNumberOfAnswers()) {
+            endOfRoundMessage = "Congratulations! You got all " + game.getNumberOfAnswers() + " correct!";
+        } else {
+            endOfRoundMessage = "You got " + guessedCorrect + " correct out of " + game.getNumberOfAnswers();
+        }
+
+        // enable and show next_round button
+        nextRound.setVisibility(View.VISIBLE);
+        nextRound.isEnabled();
+
+        instructions.setText(endOfRoundMessage);
+        guessedCorrect = 0;
+    }
+
+    public void nextRound(View view) {
+        nextRound.setVisibility(View.GONE);
+        nextRound.setEnabled(false);
+        updateView();
     }
 }
