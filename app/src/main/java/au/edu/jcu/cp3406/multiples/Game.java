@@ -1,11 +1,13 @@
 package au.edu.jcu.cp3406.multiples;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class Game {
     private final int numberOfRounds;
     private int indexOfCurrentRound = 0;
-    private Round[] rounds;
+    private final Round[] rounds;
     private Round currentRound;
 
     public Game(int numberOfRounds) {
@@ -47,9 +49,18 @@ public class Game {
         return currentRound.getAllOptions();
     }
 
-    public void nextRound() {
+    public boolean nextRound() {
+        Log.i("Game", "Index = " + indexOfCurrentRound);
+        Log.i("Game", "length = " + rounds.length);
+
         ++indexOfCurrentRound;
+        if (indexOfCurrentRound == rounds.length) {
+            // end of game
+            return true;
+        }
+
         currentRound = rounds[indexOfCurrentRound];
+        return false;
     }
 
     public int getNumberOfAnswers() {

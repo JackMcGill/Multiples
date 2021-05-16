@@ -1,5 +1,6 @@
 package au.edu.jcu.cp3406.multiples;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,6 @@ public class GameActivity extends AppCompatActivity {
     private TableRow row;
     private Button button;
     private Button nextRoundButton;
-    private int[] options;
     private int totalScore;
     private int guessedCorrect;
 
@@ -28,11 +28,14 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        game = new Game(5); // temporarily hardcoded
+
+        game = new Game(3); // temporarily hardcoded
+
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
         nextRoundButton = findViewById(R.id.next_round);
+
         totalScore = 0;
         guessedCorrect = 0;
 
@@ -50,13 +53,13 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void populateButtons() {
-        options = game.getAllOptions();
+        int[] options = game.getAllOptions();
         int index = 0;
 
         for (int i = 0; i < 5; ++i) {
             row = (TableRow) tableLayout.getChildAt(i);
             for (int j = 0; j < 2; ++j) {
-                Log.i("GameActivity", "Number: " + String.valueOf(options[index]));
+                Log.i("GameActivity", "Number: " + options[index]);
                 button = (Button) row.getChildAt(j);
                 String numberAsString = String.valueOf(options[index]);
                 button.setText(numberAsString);
@@ -78,7 +81,6 @@ public class GameActivity extends AppCompatActivity {
         if (game.checkAnswer(playerAns)) {
             button.setTextColor(0xff669900);
             // score 1 point
-            totalScore++;
             guessedCorrect++;
         } else {
             button.setTextColor(Color.RED);
@@ -86,6 +88,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if (guessedCorrect == game.getNumberOfAnswers()) {
+            totalScore++;
             endOfRound();
         }
 
@@ -96,16 +99,13 @@ public class GameActivity extends AppCompatActivity {
 
     private void endOfRound() {
         // disable and hide buttons
-        int index = 0;
 
         for (int i = 0; i < 5; ++i) {
             row = (TableRow) tableLayout.getChildAt(i);
             for (int j = 0; j < 2; ++j) {
-                Log.i("GameActivity", "Number: " + String.valueOf(options[index]) + " disabled");
                 button = (Button) row.getChildAt(j);
                 button.setEnabled(false);
                 button.setVisibility(View.GONE);
-                index++;
             }
         }
 
@@ -129,8 +129,19 @@ public class GameActivity extends AppCompatActivity {
         nextRoundButton.setVisibility(View.GONE);
         nextRoundButton.setEnabled(false);
 
-        game.nextRound();
+        boolean gameIsOver = game.nextRound();
 
-        updateView();
+        if (gameIsOver) {
+            gameOver();
+            Log.i("GameActivity", "Game is over");
+        } else {
+            updateView();
+
+        }
+    }
+
+    private void gameOver() {
+        Intent intent = new Intent(this, GameOver.class);
+        startActivity(intent);
     }
 }
