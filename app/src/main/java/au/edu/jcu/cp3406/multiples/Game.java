@@ -6,11 +6,17 @@ public class Game {
     private final int numberOfRounds;
     private int indexOfCurrentRound = 0;
     private Round[] rounds;
-    private Round round;
+    private Round currentRound;
 
     public Game(int numberOfRounds) {
         this.numberOfRounds = numberOfRounds;
-        round = createRound();
+        rounds = new Round[numberOfRounds];
+
+        for (int i = 0; i < numberOfRounds; i++) {
+            rounds[i] = createRound();
+        }
+
+        currentRound = rounds[0];
     }
 
     private Round createRound() {
@@ -26,31 +32,32 @@ public class Game {
         } else {
             number = random.nextInt(401) + 100; // int between 100 and 500
         }
-        return round = new Round(type, number);
+        return currentRound = new Round(type, number);
     }
 
     public int getNumber() {
-        return round.getNumber();
+        return currentRound.getNumber();
     }
 
     public int getRoundType() {
-        return round.getRoundType();
+        return currentRound.getRoundType();
     }
 
     public int[] getAllOptions() {
-        return round.getAllOptions();
+        return currentRound.getAllOptions();
     }
 
     public void nextRound() {
         ++indexOfCurrentRound;
+        currentRound = rounds[indexOfCurrentRound];
     }
 
     public int getNumberOfAnswers() {
-        return round.getCorrectAnswers().length;
+        return currentRound.getCorrectAnswers().length;
     }
 
     public boolean checkAnswer(int playerAns) {
-        int[] correctAnswers = round.getCorrectAnswers();
+        int[] correctAnswers = currentRound.getCorrectAnswers();
         boolean isCorrect = false;
 
         for (int answer : correctAnswers) {
@@ -61,7 +68,7 @@ public class Game {
         return isCorrect;
     }
 
-    public int getRound() {
+    public int getCurrentRound() {
         return indexOfCurrentRound;
     }
 }

@@ -19,7 +19,7 @@ public class GameActivity extends AppCompatActivity {
     private TableLayout tableLayout;
     private TableRow row;
     private Button button;
-    private Button nextRound;
+    private Button nextRoundButton;
     private int[] options;
     private int totalScore;
     private int guessedCorrect;
@@ -32,7 +32,7 @@ public class GameActivity extends AppCompatActivity {
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
-        nextRound = findViewById(R.id.next_round);
+        nextRoundButton = findViewById(R.id.next_round);
         totalScore = 0;
         guessedCorrect = 0;
 
@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void updateView() {
-        this.setTitle("Round " + game.getRound() + 1);
+        this.setTitle("Round " + (game.getCurrentRound() + 1));
         if (game.getRoundType() == 0) {
             instructions.setText(R.string.multiples_instructions);
         } else instructions.setText(R.string.factors_instructions);
@@ -60,7 +60,8 @@ public class GameActivity extends AppCompatActivity {
                 button = (Button) row.getChildAt(j);
                 String numberAsString = String.valueOf(options[index]);
                 button.setText(numberAsString);
-                button.isEnabled();
+                button.setEnabled(true);
+                button.setTextColor(Color.WHITE);
                 button.setVisibility(View.VISIBLE);
                 index++;
             }
@@ -117,16 +118,19 @@ public class GameActivity extends AppCompatActivity {
         }
 
         // enable and show next_round button
-        nextRound.setVisibility(View.VISIBLE);
-        nextRound.isEnabled();
+        nextRoundButton.setVisibility(View.VISIBLE);
+        nextRoundButton.setEnabled(true);
 
         instructions.setText(endOfRoundMessage);
         guessedCorrect = 0;
     }
 
     public void nextRound(View view) {
-        nextRound.setVisibility(View.GONE);
-        nextRound.setEnabled(false);
+        nextRoundButton.setVisibility(View.GONE);
+        nextRoundButton.setEnabled(false);
+
+        game.nextRound();
+
         updateView();
     }
 }
