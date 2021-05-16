@@ -1,13 +1,18 @@
 package au.edu.jcu.cp3406.multiples;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -18,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
     private TableRow row;
     private Button button;
     private int[] options;
+    private ArrayList<Integer> playerAnswers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
+        playerAnswers = new ArrayList<>();
 
         updateView();
     }
@@ -54,8 +61,24 @@ public class GameActivity extends AppCompatActivity {
                 String numberAsString = String.valueOf(options[index]);
                 button.setText(numberAsString);
                 index++;
-
             }
         }
+    }
+
+    public void buttonPressed(View view) {
+        Button button = (Button) view;
+        button.setTextColor(Color.RED);
+        Log.i("GameActivity", button.getText() + " pressed");
+
+        String buttonNumber = button.getText().toString();
+        int playerAns = Integer.parseInt(buttonNumber);
+
+        if (!playerAnswers.contains(playerAns)) {
+            playerAnswers.add(playerAns);
+            Log.i("GameActivity", "Added " + playerAns + " to answer list");
+        } else {
+            Log.i("GameActivity", playerAns + " already in answer list");
+        }
+
     }
 }
