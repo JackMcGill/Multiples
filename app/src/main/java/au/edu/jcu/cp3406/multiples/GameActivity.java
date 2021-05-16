@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class GameActivity extends AppCompatActivity {
     private TableRow row;
     private Button button;
     private int[] options;
-    private ArrayList<Integer> playerAnswers;
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
-        playerAnswers = new ArrayList<>();
+        score = 0;
 
         updateView();
     }
@@ -67,18 +66,21 @@ public class GameActivity extends AppCompatActivity {
 
     public void buttonPressed(View view) {
         Button button = (Button) view;
-        button.setTextColor(Color.RED);
-        Log.i("GameActivity", button.getText() + " pressed");
+        button.setEnabled(false);
 
         String buttonNumber = button.getText().toString();
         int playerAns = Integer.parseInt(buttonNumber);
 
-        if (!playerAnswers.contains(playerAns)) {
-            playerAnswers.add(playerAns);
-            Log.i("GameActivity", "Added " + playerAns + " to answer list");
+        if (game.checkAnswer(playerAns)) {
+            button.setTextColor(0xff669900);
+            // score 1 point
+            score++;
         } else {
-            Log.i("GameActivity", playerAns + " already in answer list");
+            button.setTextColor(Color.RED);
+            // score no points
         }
 
+        Log.i("GameActivity", button.getText() + " pressed");
+        Log.i("GameActivity", "Score is: " + score);
     }
 }

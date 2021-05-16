@@ -118,4 +118,8 @@ public class Round {
     public int[] getAllOptions() {
         return allOptions;
     }
+
+    public int[] getCorrectAnswers() {
+        return correctAnswers;
+    }
 }
