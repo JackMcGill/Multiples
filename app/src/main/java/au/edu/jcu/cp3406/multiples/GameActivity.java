@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
 
+    private int numberOfRounds;
     private Game game;
     private TextView numberView;
     private TextView instructions;
@@ -29,7 +30,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        game = new Game(3); // temporarily hardcoded
+        game = new Game(2); // temporarily hardcoded
 
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
@@ -142,6 +143,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void gameOver() {
         Intent intent = new Intent(this, GameOver.class);
+        intent.putExtra("score", totalScore);
+        intent.putExtra("numberOfRounds", totalScore);
         startActivity(intent);
     }
 }

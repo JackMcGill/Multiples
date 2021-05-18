@@ -3,4 +3,5 @@
     <string name="multiples_instructions">Find multiples of this number</string>
     <string name="factors_instructions">Find factors of this number</string>
     <string name="next_round">Next Round</string>
+    <string name="game_over">Game Over</string>
 </resources>
