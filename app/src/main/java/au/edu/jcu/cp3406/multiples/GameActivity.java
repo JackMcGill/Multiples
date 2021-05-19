@@ -1,8 +1,12 @@
 package au.edu.jcu.cp3406.multiples;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +16,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class GameActivity extends AppCompatActivity {
 
     private int numberOfRounds;
     private Game game;
+    private boolean gameLoaded;
     private TextView numberView;
     private TextView instructions;
     private TableLayout tableLayout;
@@ -30,7 +37,13 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        game = new Game(2); // temporarily hardcoded
+        loadSettings();
+
+        // game creation is done on a separate thread, otherwise the app crashes occasionally
+        AsyncTask.execute(() -> {
+            game = new Game(numberOfRounds);
+            gameLoaded = true;
+        });
 
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
@@ -40,7 +53,22 @@ public class GameActivity extends AppCompatActivity {
         totalScore = 0;
         guessedCorrect = 0;
 
-        updateView();
+        // this is to wait for the AsyncTask to finish executing
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (gameLoaded) {
+                    updateView();
+                }
+            }
+        }, 2000);
+    }
+
+    public void loadSettings() {
+        SharedPreferences settingsData = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        numberOfRounds = settingsData.getInt("rounds", 5);
+        isHardMode = settingsData.getBoolean("hardMode", false);
     }
 
     public void updateView() {
