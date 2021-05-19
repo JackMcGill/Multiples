@@ -2,6 +2,7 @@ package au.edu.jcu.cp3406.multiples;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGamePressed(View view) {
         Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+
+        // prevents app crashing occaisonally.
+        AsyncTask.execute(() -> startActivity(intent));
     }
 }
