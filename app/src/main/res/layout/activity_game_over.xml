@@ -22,15 +22,26 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:onClick="shareButtonPressed"
-        android:text="Share my score to twitter"
+        android:text="@string/share_my_score_to_twitter"
         android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="newGameButtonPressed"
+        android:text="@string/new_game"
+        android:textSize="26sp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:onClick="mainMenuButtonPressed"
-        android:text="Back to main menu"
+        android:text="@string/main_menu"
         android:textSize="26sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

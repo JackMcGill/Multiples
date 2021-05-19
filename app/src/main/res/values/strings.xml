@@ -8,4 +8,9 @@
     <string name="easy">Easy</string>
     <string name="difficulty">Difficulty</string>
     <string name="number_of_rounds">Number of rounds</string>
+    <string name="new_game">New Game</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="share_my_score_to_twitter">Share my score to twitter</string>
+    <string name="end_of_game_message">Congratulations! You just scored %d on %s</string>
+    <string name="twitter_message">%s just scored %d on %s</string>
 </resources>

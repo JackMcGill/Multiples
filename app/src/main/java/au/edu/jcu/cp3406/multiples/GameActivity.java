@@ -160,7 +160,6 @@ public class GameActivity extends AppCompatActivity {
             Log.i("GameActivity", "Game is over");
         } else {
             updateView();
-
         }
     }
 
