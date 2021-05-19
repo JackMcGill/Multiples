@@ -4,4 +4,8 @@
     <string name="factors_instructions">Find factors of this number</string>
     <string name="next_round">Next Round</string>
     <string name="game_over">Game Over</string>
+    <string name="hard">Hard</string>
+    <string name="easy">Easy</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="number_of_rounds">Number of rounds</string>
 </resources>
