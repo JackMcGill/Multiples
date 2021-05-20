@@ -19,12 +19,12 @@ public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences settingsData;
 
     private String name;
-    private EditText nameEditText;
     private int numberOfRounds;
-    private EditText roundsEditText;
     private int timePerRound;
-    private EditText timePerRoundsEditText;
     private boolean isHardMode;
+    private EditText nameText;
+    private EditText roundsText;
+    private EditText timePerRoundText;
     private RadioButton difficultyButton;
 
     @Override
@@ -38,9 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         settingsData = getSharedPreferences("settings", Context.MODE_PRIVATE);
-        nameEditText = findViewById(R.id.name);
-        roundsEditText = findViewById(R.id.numberOfRounds);
-        timePerRoundsEditText = findViewById(R.id.timePerRound);
+        nameText = findViewById(R.id.name);
+        roundsText = findViewById(R.id.numberOfRounds);
+        timePerRoundText = findViewById(R.id.timePerRound);
 
         loadSettings();
         updateView();
@@ -83,9 +83,9 @@ public class SettingsActivity extends AppCompatActivity {
     public void saveSettings() {
         SharedPreferences.Editor editor = settingsData.edit();
 
-        name = nameEditText.getText().toString();
-        numberOfRounds = Integer.parseInt(roundsEditText.getText().toString());
-        timePerRound = Integer.parseInt(timePerRoundsEditText.getText().toString());
+        name = nameText.getText().toString();
+        numberOfRounds = Integer.parseInt(roundsText.getText().toString());
+        timePerRound = Integer.parseInt(timePerRoundText.getText().toString());
 
         editor.putString("name", name);
         editor.putInt("rounds", numberOfRounds);
@@ -105,9 +105,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void updateView() {
-        nameEditText.setText(name);
-        roundsEditText.setText(String.valueOf(numberOfRounds));
-        timePerRoundsEditText.setText(String.valueOf(timePerRound));
+        nameText.setText(name);
+        roundsText.setText(String.valueOf(numberOfRounds));
+        timePerRoundText.setText(String.valueOf(timePerRound));
 
         if (isHardMode) {
             difficultyButton = findViewById(R.id.hardDifficulty);
