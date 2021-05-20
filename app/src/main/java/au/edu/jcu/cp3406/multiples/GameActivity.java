@@ -50,8 +50,6 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        timer = new Timer(timePerRound);
-        timerView = findViewById(R.id.timerView);
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
@@ -61,6 +59,7 @@ public class GameActivity extends AppCompatActivity {
         guessedCorrect = 0;
 
         updateView();
+        enableTimer();
     }
 
     public void loadSettings() {
@@ -78,18 +77,22 @@ public class GameActivity extends AppCompatActivity {
 
         numberView.setText(String.valueOf(game.getNumber()));
         populateButtons();
+        timer = new Timer(timePerRound);
+        timerView = findViewById(R.id.timerView);
+        timeIsUp = false;
+
         enableTimer();
     }
 
     private void enableTimer() {
-        timeIsUp = false;
+        int time = 1000;
         handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
                 if (!timeIsUp) {
                     timer.tick();
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, time);
                     timerView.setText(String.format("Time left: %s%s", timer.toString(), getString(R.string.time_left)));
                     if (timer.getTimeLeft() == 0) {
                         timeIsUp = true;
@@ -171,12 +174,15 @@ public class GameActivity extends AppCompatActivity {
 
         instructions.setText(endOfRoundMessage);
         guessedCorrect = 0;
-        timer.reset();
+
+        timeIsUp = true;
     }
 
     public void nextRound(View view) {
         nextRoundButton.setVisibility(View.GONE);
         nextRoundButton.setEnabled(false);
+        timeIsUp = false;
+        timer.reset();
 
         boolean gameIsOver = game.nextRound();
 
