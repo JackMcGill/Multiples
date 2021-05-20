@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity {
 
+    private Timer timer;
+    private TextView timerView;
+    private boolean timeIsUp;
+    private Handler handler;
     private int numberOfRounds;
     private boolean isHardMode;
     private Game game;
@@ -36,12 +41,7 @@ public class GameActivity extends AppCompatActivity {
         loadSettings();
 
         // game creation is done on a separate thread, otherwise the app crashes occasionally when run on the main thread
-        Thread createGame = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                game = new Game(numberOfRounds, isHardMode);
-            }
-        });
+        Thread createGame = new Thread(() -> game = new Game(numberOfRounds, isHardMode));
         createGame.start();
         try {
             createGame.join();
@@ -49,6 +49,8 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        timer = new Timer(10);
+        timerView = findViewById(R.id.timerView);
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
         tableLayout = findViewById(R.id.table_layout);
@@ -74,6 +76,27 @@ public class GameActivity extends AppCompatActivity {
 
         numberView.setText(String.valueOf(game.getNumber()));
         populateButtons();
+        enableTimer();
+    }
+
+    private void enableTimer() {
+        timeIsUp = false;
+        handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (!timeIsUp) {
+                    timer.tick();
+                    handler.postDelayed(this, 1000);
+                    timerView.setText(String.format("Time left: %s%s", timer.toString(), getString(R.string.time_left)));
+                    if (timer.getTimeLeft() == 0) {
+                        timeIsUp = true;
+                        endOfRound();
+                    }
+                }
+            }
+        });
+
     }
 
     private void populateButtons() {
@@ -123,7 +146,6 @@ public class GameActivity extends AppCompatActivity {
 
     private void endOfRound() {
         // disable and hide buttons
-
         for (int i = 0; i < 5; ++i) {
             row = (TableRow) tableLayout.getChildAt(i);
             for (int j = 0; j < 2; ++j) {
@@ -147,6 +169,7 @@ public class GameActivity extends AppCompatActivity {
 
         instructions.setText(endOfRoundMessage);
         guessedCorrect = 0;
+        timer.reset();
     }
 
     public void nextRound(View view) {

@@ -11,7 +11,6 @@ public class Round {
     private final boolean isHardMode;
     private final int[] correctAnswers;
     private final int[] allOptions;
-//    private final int[] userAnswers;
 
     public Round(int roundType, int number, boolean isHardMode) {
         this.roundType = roundType;
