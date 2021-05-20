@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,7 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements SensorEventListener {
 
     private Timer timer;
     private TextView timerView;
@@ -33,11 +37,19 @@ public class GameActivity extends AppCompatActivity {
     private Button nextRoundButton;
     private int totalScore;
     private int guessedCorrect;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+    private long mLastShakeTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener((SensorEventListener) this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mLastShakeTime = System.currentTimeMillis();
 
         loadSettings();
 
@@ -60,6 +72,42 @@ public class GameActivity extends AppCompatActivity {
 
         updateView();
         enableTimer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener((SensorEventListener) this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            long currentTime = System.currentTimeMillis();
+
+            // check if a minimum of 1 second has elapsed since last "shake" of the device
+            if ((currentTime - mLastShakeTime) > 1000) {
+
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+
+                double acceleration = Math.sqrt(Math.pow(x, 2) +
+                        Math.pow(y, 2) +
+                        Math.pow(z, 2)) - SensorManager.GRAVITY_EARTH;
+
+                if (acceleration > 1f) {
+                    mLastShakeTime = currentTime;
+                    Log.i("GameActivity", "shake it");
+                    endOfRound();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // this method is not used.
     }
 
     public void loadSettings() {
