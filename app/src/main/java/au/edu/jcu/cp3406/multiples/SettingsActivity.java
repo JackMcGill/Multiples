@@ -22,6 +22,8 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText nameEditText;
     private int numberOfRounds;
     private EditText roundsEditText;
+    private int timePerRound;
+    private EditText timePerRoundsEditText;
     private boolean isHardMode;
     private RadioButton difficultyButton;
 
@@ -38,6 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
         settingsData = getSharedPreferences("settings", Context.MODE_PRIVATE);
         nameEditText = findViewById(R.id.name);
         roundsEditText = findViewById(R.id.numberOfRounds);
+        timePerRoundsEditText = findViewById(R.id.timePerRound);
 
         loadSettings();
         updateView();
@@ -82,9 +85,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         name = nameEditText.getText().toString();
         numberOfRounds = Integer.parseInt(roundsEditText.getText().toString());
+        timePerRound = Integer.parseInt(timePerRoundsEditText.getText().toString());
 
         editor.putString("name", name);
         editor.putInt("rounds", numberOfRounds);
+        editor.putInt("timePerRound", timePerRound);
         editor.putBoolean("hardMode", isHardMode);
 
         editor.apply();
@@ -95,12 +100,14 @@ public class SettingsActivity extends AppCompatActivity {
     public void loadSettings() {
         name = settingsData.getString("name", "Player"); // default name is Player
         numberOfRounds = settingsData.getInt("rounds", 5); // default number of rounds is 5
+        timePerRound = settingsData.getInt("timePerRound", 10); // default of 10 seconds per round
         isHardMode = settingsData.getBoolean("hardMode", false); // default difficulty is easy
     }
 
     public void updateView() {
         nameEditText.setText(name);
         roundsEditText.setText(String.valueOf(numberOfRounds));
+        timePerRoundsEditText.setText(String.valueOf(timePerRound));
 
         if (isHardMode) {
             difficultyButton = findViewById(R.id.hardDifficulty);

@@ -22,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
     private boolean timeIsUp;
     private Handler handler;
     private int numberOfRounds;
+    private int timePerRound;
     private boolean isHardMode;
     private Game game;
     private TextView numberView;
@@ -49,7 +50,7 @@ public class GameActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        timer = new Timer(10);
+        timer = new Timer(timePerRound);
         timerView = findViewById(R.id.timerView);
         numberView = findViewById(R.id.numberTextView);
         instructions = findViewById(R.id.instructions);
@@ -65,6 +66,7 @@ public class GameActivity extends AppCompatActivity {
     public void loadSettings() {
         SharedPreferences settingsData = getSharedPreferences("settings", Context.MODE_PRIVATE);
         numberOfRounds = settingsData.getInt("rounds", 5);
+        timePerRound = settingsData.getInt("timePerRound", 10);
         isHardMode = settingsData.getBoolean("hardMode", false);
     }
 
