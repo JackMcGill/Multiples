@@ -1,7 +1,6 @@
 package au.edu.jcu.cp3406.multiples;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,5 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
         // prevents app crashing occaisonally.
         AsyncTask.execute(() -> startActivity(intent));
+    }
+
+    public void howToPressed(View view) {
+        Intent intent = new Intent(this, HowTo.class);
+        startActivity(intent);
     }
 }
