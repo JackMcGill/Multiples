@@ -29,4 +29,5 @@
     <string name="screenshot_description">A screenshot showing what the game screen looks like</string>
     <string name="the_fun_factor_in_maths_just_got_multiplied">The fun factor in maths just got multiplied!</string>
     <string name="highscores">Highscores</string>
+    <string name="player_name">Player Name</string>
 </resources>
