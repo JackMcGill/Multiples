@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/name"
         android:importantForAutofill="no"
+        android:paddingLeft="20dp"
         android:textSize="30sp" />
 
     <TextView
@@ -35,6 +36,7 @@
         android:hint="@string/number_of_rounds"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:paddingLeft="20dp"
         android:textSize="30sp" />
 
     <TextView
@@ -51,6 +53,7 @@
         android:hint="@string/time_per_round"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:paddingLeft="20dp"
         android:textSize="30sp" />
 
     <TextView
