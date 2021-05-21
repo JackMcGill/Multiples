@@ -97,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_corners"
                 android:onClick="settingsPressed"
                 android:text="@string/settings" />
 
@@ -104,6 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_corners"
                 android:onClick="playpressed"
                 android:text="@string/lets_play" />
 

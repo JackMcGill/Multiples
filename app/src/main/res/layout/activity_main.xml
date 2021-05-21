@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners"
         android:onClick="startGamePressed"
         android:text="@string/start_game" />
 
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners"
         android:onClick="howToPressed"
         android:text="@string/how_to_play" />
 
@@ -26,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners"
         android:text="Highscores" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
