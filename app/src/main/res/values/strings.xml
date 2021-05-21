@@ -27,4 +27,6 @@
     <string name="settings">Settings</string>
     <string name="lets_play">Lets Play!</string>
     <string name="screenshot_description">A screenshot showing what the game screen looks like</string>
+    <string name="the_fun_factor_in_maths_just_got_multiplied">The fun factor in maths just got multiplied!</string>
+    <string name="highscores">Highscores</string>
 </resources>
