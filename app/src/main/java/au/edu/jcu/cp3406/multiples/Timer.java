@@ -1,7 +1,7 @@
 package au.edu.jcu.cp3406.multiples;
 
 public class Timer {
-    private int totalTime;
+    private final int totalTime;
     private int timeLeft;
 
     Timer(int timePerRound) {

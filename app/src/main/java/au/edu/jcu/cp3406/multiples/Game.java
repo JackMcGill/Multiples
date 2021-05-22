@@ -86,6 +86,7 @@ public class Game {
         for (int answer : correctAnswers) {
             if (playerAns == answer) {
                 isCorrect = true;
+                break;
             }
         }
         return isCorrect;
