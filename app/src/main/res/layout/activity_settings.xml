@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Player Name"
+        android:text="@string/player_name"
         android:textAlignment="center"
         android:textSize="36sp" />
 
@@ -19,6 +19,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/name"
         android:importantForAutofill="no"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:textSize="30sp" />
 
     <TextView
@@ -35,6 +38,8 @@
         android:hint="@string/number_of_rounds"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:textSize="30sp" />
 
     <TextView
@@ -51,6 +56,8 @@
         android:hint="@string/time_per_round"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:textSize="30sp" />
 
     <TextView

@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners"
         android:onClick="shareButtonPressed"
         android:text="@string/share_my_score_to_twitter"
         android:textSize="36sp" />
@@ -32,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners"
         android:onClick="newGameButtonPressed"
         android:text="@string/new_game"
         android:textSize="26sp" />
@@ -40,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_corners"
         android:onClick="mainMenuButtonPressed"
         android:text="@string/main_menu"
         android:textSize="26sp" />
