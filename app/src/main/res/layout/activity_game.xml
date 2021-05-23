@@ -20,6 +20,12 @@
         android:textAlignment="center"
         android:textSize="36sp" />
 
+    <TextView
+        android:id="@+id/timerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
+
     <TableLayout
         android:id="@+id/table_layout"
         android:layout_width="match_parent"
