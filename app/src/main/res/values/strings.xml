@@ -11,8 +11,8 @@
     <string name="new_game">New Game</string>
     <string name="main_menu">Main Menu</string>
     <string name="share_my_score_to_twitter">Share my score to twitter</string>
-    <string name="end_of_game_message">Congratulations! You just scored %d on %s</string>
-    <string name="twitter_message">%s just scored %d on %s</string>
+    <string name="end_of_game_message">Congratulations! You just scored %d out of %d on %s</string>
+    <string name="twitter_message">%s just scored %d out of %d on %s</string>
     <string name="time_left">\ seconds\</string>
     <string name="time_per_round">Time per Round</string>
     <string name="name">Name</string>

@@ -245,7 +245,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     private void gameOver() {
         Intent intent = new Intent(this, GameOver.class);
         intent.putExtra("score", totalScore);
-        intent.putExtra("numberOfRounds", totalScore);
+        intent.putExtra("numberOfRounds", numberOfRounds);
         startActivity(intent);
     }
 }

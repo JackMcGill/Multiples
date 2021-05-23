@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,9 +21,9 @@ public class GameOver extends AppCompatActivity {
 
     private String name;
     private int score;
+    private int numberOfRounds;
     private boolean isHardMode;
     private Twitter twitter;
-    private TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         score = getIntent().getIntExtra("score", 0);
-        message = findViewById(R.id.game_over_message);
+        numberOfRounds = getIntent().getIntExtra("numberOfRounds", 0);
+        TextView message = findViewById(R.id.game_over_message);
         loadSettings();
         String generatedMessage = generateMessage();
         message.setText(generatedMessage);
@@ -54,7 +56,7 @@ public class GameOver extends AppCompatActivity {
             mode = "easy mode";
         }
 
-        String formattedMessage = String.format(getString(R.string.end_of_game_message), score, mode);
+        String formattedMessage = String.format(getString(R.string.end_of_game_message), score, numberOfRounds, mode);
         return formattedMessage + "!";
     }
 
@@ -73,6 +75,7 @@ public class GameOver extends AppCompatActivity {
                 .setOAuthAccessTokenSecret(accessTokenSecret);
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
+        Toast.makeText(this, "Tweeted successfully", Toast.LENGTH_SHORT).show();
 
         AsyncTask.execute(() -> {
             try {
@@ -92,7 +95,7 @@ public class GameOver extends AppCompatActivity {
             mode = "easy mode";
         }
 
-        String formattedMessage = String.format(getString(R.string.twitter_message), name, score, mode);
+        String formattedMessage = String.format(getString(R.string.twitter_message), name, score, numberOfRounds, mode);
         return formattedMessage + "!";
     }
 
